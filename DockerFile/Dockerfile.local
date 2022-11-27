@@ -2,10 +2,12 @@ ARG BASE_IMG
 FROM $BASE_IMG
 
 ENV DOCKER_NAMESPACE=local
+ENV ENTRYPOINT_SOURCE="./src/config/docker/scripts/${DOCKER_NAMESPACE}-entrypoint.sh"
+ENV ENTRYPOINT_DEST="/entrypoint.sh"
 
 # Setup run script
-COPY "./src/config/docker/scripts/${DOCKER_NAMESPACE}-entrypoint.sh" /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY $ENTRYPOINT_SOURCE $ENTRYPOINT_DEST
+RUN chmod +x $ENTRYPOINT_DEST
 
 # Install dependencies using poetry
 ENV APP_DEST=/app/
@@ -20,3 +22,5 @@ RUN --mount=type=ssh poetry install --no-interaction --no-root -v
 # Clean up
 RUN rm pyproject.toml poetry.lock
 WORKDIR /
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
