@@ -1,0 +1,7 @@
+version: "3"
+services:
+  ${PROJECT_NAME}:
+    env_file: .env
+
+volumes:
+  "${APP_SOURCE}:${APP_DEST}"
