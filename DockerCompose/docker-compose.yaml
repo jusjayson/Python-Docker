@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ${PROJECT_NAME}:
+    image: docker.funkybrows.com/${PROJECT_NAME}/${DOCKER_NAMESPACE}:${DOCKER_TAG_VERSION}
+    container_name: "$PROJECT_NAME"
+    environment:
+    restart: unless-stopped
+    depends_on:
+    env_file: .env
