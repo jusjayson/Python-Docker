@@ -1,0 +1,24 @@
+FROM python:3.10-slim
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONFAULTHANDER=1 \
+    PATH="/root/.local/bin:$PATH"
+
+RUN apt-get update \
+    && apt-get -y install \
+    curl \
+    gcc \
+    git \
+    libpq-dev
+
+# add github and gitlab to known hosts in order to install dependencies via poetry
+RUN mkdir -p -m u=rw ~/.ssh \
+    && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts \
+    && ssh-keyscan -t rsa gitlab.com >> ~/.ssh/known_hosts
+
+# install poetry
+ENV POETRY_VERSION=1.2 \
+    POETRY_VIRTUALENVS_CREATE=false
+RUN curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@master;
+
+ENV APP_DEST=/app
+
