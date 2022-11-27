@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ${PROJECT_NAME}:
+    environment:
+      - PG_DRIVER=${PG_DRIVER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_HOST=${PROJECT_NAME}-postgres
+      - PG_PORT=5432
+      - PG_NAME=${PG_NAME}
+      - PG_USER=${PG_USER}
+    depends_on:
+      ${PROJECT_NAME}-postgres:
+        condition: service_healthy
+
+
+volumes:
+  ${PROJECT_NAME}-${DOCKER_NAMESPACE}-postgres-data:
+    driver: local
