@@ -32,6 +32,7 @@ build-project:
 		-t $(DOCKER_REGISTRY)/$(PROJECT_NAME)/$(NAMESPACE):$(DOCKER_TAG_VERSION) \
 		--ssh default=$(HOME)/.ssh/id_rsa \
 		-f ./DockerFile/Dockerfile.$(NAMESPACE) \
+		--progress=plain \
 	$(DOCKER_CTX)
 
 deploy-project:
