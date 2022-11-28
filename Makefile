@@ -1,3 +1,8 @@
+
+include $(COMMON_ENV_FILE)
+include $(SPECIFIC_ENV_FILE)
+export
+
 DOCKER_APP_DEST ?=
 DOCKER_APP_SOURCE ?=
 DOCKER_CTX ?= .
@@ -14,10 +19,6 @@ DOCKER_COMPOSE_FILE ?= $(DOCKER_APP_SOURCE)/src/config/docker/compose/docker-com
 ifndef WATCH_DOCKER
 WATCH_DOCKER = -d
 endif
-
-include $(COMMON_ENV_FILE)
-include $(SPECIFIC_ENV_FILE)
-export
 
 build-base-image:
 	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build -t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) -f DockerFile/Dockerfile.base .
