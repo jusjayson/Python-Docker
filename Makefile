@@ -18,11 +18,12 @@ build-base-image:
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
 		--build-arg APP_DEST=$(DOCKER_APP_DEST) \
+		--build-arg APP_SOURCE=$(DOCKER_APP_SOURCE) \
 		--build-arg BASE_IMG=$(DOCKER_BASE_IMG) \
 		--build-arg NAMESPACE=$(NAMESPACE) \
 		--build-arg ENTRYPOINT_SOURCE=$(DOCKER_ENTRYPOINT_SOURCE) \
 		--build-arg ENTRYPOINT_DEST=$(DOCKER_ENTRYPOINT_DEST) \
 		-t $(DOCKER_REGISTRY)/$(PROJECT_NAME)/$(NAMESPACE):$(DOCKER_TAG_VERSION) \
 		--ssh default=$(HOME)/.ssh/id_rsa \
-		-f ./DockerFile/Dockerfile.$(NAMESPACE)\
+		-f ./DockerFile/Dockerfile.$(NAMESPACE) \
 	$(DOCKER_CTX)
