@@ -1,4 +1,5 @@
 DOCKER_APP_DEST ?=
+DOCKER_APP_SOURCE ?=
 DOCKER_CTX ?= .
 DOCKER_ENTRYPOINT_DEST ?= /app
 DOCKER_ENTRYPOINT_SOURCE ?=
@@ -8,6 +9,10 @@ DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
+DOCKER_COMPOSE_FILE ?= $(DOCKER_APP_SOURCE)/src/config/docker/compose/docker-compose-$(NAMESPACE).yaml
+ifndef WATCH_DOCKER
+WATCH_DOCKER = -d
+endif
 
 include $(ENV_FILE)
 export
@@ -27,3 +32,6 @@ build-project:
 		--ssh default=$(HOME)/.ssh/id_rsa \
 		-f ./DockerFile/Dockerfile.$(NAMESPACE) \
 	$(DOCKER_CTX)
+
+deploy-project:
+	docker compose -f $(DOCKER_COMPOSE_FILE) $(WATCH_DOCKER)
