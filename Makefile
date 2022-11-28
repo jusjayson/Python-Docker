@@ -3,7 +3,8 @@ DOCKER_APP_SOURCE ?=
 DOCKER_CTX ?= .
 DOCKER_ENTRYPOINT_DEST ?= /app
 DOCKER_ENTRYPOINT_SOURCE ?=
-DOCKER_ENV_FILE ?= .env
+COMMON_ENV_FILE ?= .env
+SPECIFIC_ENV_FILE ?= .env
 NAMESPACE ?=
 DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
@@ -14,7 +15,8 @@ ifndef WATCH_DOCKER
 WATCH_DOCKER = -d
 endif
 
-include $(ENV_FILE)
+include $(COMMON_ENV_FILE)
+include $(SPECIFIC_ENV_FILE)
 export
 
 build-base-image:
@@ -34,4 +36,4 @@ build-project:
 	$(DOCKER_CTX)
 
 deploy-project:
-	ENV_FILE=$(ENV_FILE) docker compose -f $(DOCKER_COMPOSE_FILE) $(WATCH_DOCKER)
+	docker compose -f $(DOCKER_COMPOSE_FILE) --env-file <(cat "$(COMMON_ENV_FILE)" "$(SPECIFIC_ENV_FILE")) up $(WATCH_DOCKER)
