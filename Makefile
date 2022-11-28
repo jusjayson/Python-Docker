@@ -1,16 +1,14 @@
 
-include $(COMMON_ENV_FILE)
-include $(SPECIFIC_ENV_FILE)
+include $(DOCKER_COMMON_ENV_FILE)
+include $(DOCKER_SPECIFIC_ENV_FILE)
 export
 
 DOCKER_APP_DEST ?=
 DOCKER_APP_SOURCE ?=
+DOCKER_COMMON_ENV_FILE ?= base.env
 DOCKER_CTX ?= .
 DOCKER_ENTRYPOINT_DEST ?= /app
 DOCKER_ENTRYPOINT_SOURCE ?=
-COMMON_ENV_FILE ?= .env
-SPECIFIC_ENV_FILE ?= .env
-NAMESPACE ?=
 DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
 NAMESPACE ?=
@@ -18,6 +16,7 @@ PROJECT_ROOT ?=
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
 DOCKER_COMPOSE_FILE ?= $(PROJECT_ROOT)/src/config/docker/compose/docker-compose.$(NAMESPACE).yaml
+DOCKER_SPECIFIC_ENV_FILE ?= $(NAMESPACE).env
 
 build-base-image:
 	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build -t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) -f DockerFile/Dockerfile.base .
