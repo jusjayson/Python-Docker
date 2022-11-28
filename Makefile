@@ -35,4 +35,4 @@ build-project:
 	$(DOCKER_CTX)
 
 deploy-project:
-	docker compose -f $(DOCKER_COMPOSE_FILE) --env-file <(cat "$(COMMON_ENV_FILE)" "$(SPECIFIC_ENV_FILE")) up $(WATCH_DOCKER)
+	docker compose -f $(DOCKER_COMPOSE_FILE) up $(NO_WATCH_DOCKER)
