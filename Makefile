@@ -19,7 +19,9 @@ DOCKER_COMPOSE_FILE ?= $(PROJECT_ROOT)/src/config/docker/compose/docker-compose.
 DOCKER_SPECIFIC_ENV_FILE ?= $(NAMESPACE).env
 
 build-base-image:
-	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build -t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) -f DockerFile/Dockerfile.base .
+	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build \
+		-t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) \
+		-f DockerFile/Dockerfile.base .
 
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
