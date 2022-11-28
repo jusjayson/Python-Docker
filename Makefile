@@ -37,3 +37,6 @@ build-project:
 
 deploy-project:
 	docker compose -f $(DOCKER_COMPOSE_FILE) up $(NO_WATCH_DOCKER)
+
+teardown-project:
+	docker compose -f $(DOCKER_COMPOSE_FILE) down
