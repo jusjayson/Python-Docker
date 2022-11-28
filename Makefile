@@ -14,12 +14,10 @@ NAMESPACE ?=
 DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
 NAMESPACE ?=
+PROJECT_ROOT ?=
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
-DOCKER_COMPOSE_FILE ?= $(DOCKER_APP_SOURCE)/src/config/docker/compose/docker-compose-$(NAMESPACE).yaml
-ifndef WATCH_DOCKER
-WATCH_DOCKER = -d
-endif
+DOCKER_COMPOSE_FILE ?= $(PROJECT_ROOT)/src/config/docker/compose/docker-compose.$(NAMESPACE).yaml
 
 build-base-image:
 	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build -t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) -f DockerFile/Dockerfile.base .
