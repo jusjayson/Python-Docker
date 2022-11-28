@@ -13,6 +13,7 @@ SPECIFIC_ENV_FILE ?= .env
 NAMESPACE ?=
 DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
+NAMESPACE ?=
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
 DOCKER_COMPOSE_FILE ?= $(DOCKER_APP_SOURCE)/src/config/docker/compose/docker-compose-$(NAMESPACE).yaml
