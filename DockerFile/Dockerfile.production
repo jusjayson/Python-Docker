@@ -2,7 +2,7 @@ ARG BASE_IMG
 FROM $BASE_IMG
 
 ENV NAMESPACE=production
-ENV ENTRYPOINT_SOURCE="./src/config/docker/scripts/${NAMESPACE}-entrypoint.sh"
+ARG ENTRYPOINT_SOURCE
 ENV ENTRYPOINT_DEST="/entrypoint.sh"
 
 # Setup run script
