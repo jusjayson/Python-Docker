@@ -14,5 +14,5 @@ services:
 
 
 volumes:
-  ${PROJECT_NAME}-${DOCKER_NAMESPACE}-postgres-data:
+  ${PROJECT_NAME}-${NAMESPACE}-postgres-data:
     driver: local

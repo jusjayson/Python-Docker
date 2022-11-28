@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd $APP_DEST;
+cd $DOCKER_APP_DEST;
 alembic upgrade head;

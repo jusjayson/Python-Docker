@@ -5,7 +5,7 @@ postgres:
       - POSTGRES_PASSWORD=${PG_PASSWORD}
       - POSTGRES_USER=${PG_USER}
     volumes:
-      - ${PROJECT_NAME}-$DOCKER_NAMESPACE-postgres-data:/var/lib/postgresql/data
+      - ${PROJECT_NAME}-${NAMESPACE}-postgres-data:/var/lib/postgresql/data
       - ./scripts/postgres:/docker-entrypoint-initdb.d
 
     healthcheck:
