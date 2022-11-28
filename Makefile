@@ -13,6 +13,9 @@ DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
 NAMESPACE ?=
 PROJECT_ROOT ?=
+ifndef DOCKER_WATCH
+DOCKER_NO_WATCH = -d
+endif
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
 DOCKER_COMPOSE_FILE ?= $(PROJECT_ROOT)/src/config/docker/compose/docker-compose.$(NAMESPACE).yaml
@@ -38,7 +41,7 @@ build-project:
 	$(DOCKER_CTX)
 
 deploy-project:
-	docker compose -f $(DOCKER_COMPOSE_FILE) up $(NO_WATCH_DOCKER)
+	docker compose -f $(DOCKER_COMPOSE_FILE) up $(DOCKER_NO_WATCH)
 
 teardown-project:
 	docker compose -f $(DOCKER_COMPOSE_FILE) down
