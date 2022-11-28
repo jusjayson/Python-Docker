@@ -18,6 +18,8 @@ WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --without dev --no-interaction --no-ansi --no-root -v
 COPY $APP_SOURCE $APP_DEST
+RUN mv $APP_DEST/src/* $APP_DEST/
+RUN rm -R $APP_DEST/src
 RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
 
 # Clean up
