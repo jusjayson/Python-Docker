@@ -18,7 +18,6 @@ WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --no-interaction --no-ansi --no-root -v
 COPY $APP_SOURCE $APP_DEST
-RUN --mount=type=ssh poetry install --no-interaction --no-root -v
 
 # Clean up
 RUN rm pyproject.toml poetry.lock
