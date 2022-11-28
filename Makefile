@@ -34,4 +34,4 @@ build-project:
 	$(DOCKER_CTX)
 
 deploy-project:
-	docker compose -f $(DOCKER_COMPOSE_FILE) $(WATCH_DOCKER)
+	ENV_FILE=$(ENV_FILE) docker compose -f $(DOCKER_COMPOSE_FILE) $(WATCH_DOCKER)
