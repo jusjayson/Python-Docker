@@ -21,19 +21,16 @@ DOCKER_ENTRYPOINT_SOURCE ?=
 DOCKER_REGISTRY ?=
 DOCKER_TAG_VERSION ?= latest
 NAMESPACE ?=
-PROJECT_ROOT ?=
-ifndef DOCKER_WATCH
-DOCKER_NO_WATCH = -d
-endif
+PYTHON_VERSION ?= 3.10
 
-DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/base:latest
+DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:latest
 DOCKER_COMPOSE_FILE ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_ROOT_FROM_CTX)/src/config/docker/compose/docker-compose.$(NAMESPACE).yaml
 DOCKER_ENTRYPOINT_SOURCE ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_ROOT_FROM_CTX)/src/config/docker/scripts/$(NAMESPACE)-entrypoint.sh
 
 build-base-image:
 	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build \
-		-t $(DOCKER_REGISTRY)/python-docker/base:$(DOCKER_TAG_VERSION) \
-		-f DockerFile/Dockerfile.base .
+		-t $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION) \
+		-f DockerFile/Dockerfile.base.$(PYTHON_VERSION) .
 
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
