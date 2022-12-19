@@ -10,7 +10,7 @@ COPY $ENTRYPOINT_SOURCE $ENTRYPOINT_DEST
 RUN chmod +x $ENTRYPOINT_DEST
 
 # Install dependencies using poetry
-ARG APP_DEST=/app/
+ARG APP_DEST=/app
 ARG APP_SOURCE
 COPY ${APP_SOURCE}/pyproject.toml $APP_DEST
 COPY ${APP_SOURCE}/poetry.lock $APP_DEST
