@@ -17,7 +17,7 @@ COPY ${APP_SOURCE_FROM_CTX}/poetry.lock $APP_DEST/
 WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --no-interaction --no-ansi --no-root -v
-COPY $APP_SOURCE_FROM_CTX $APP_DEST
+COPY $APP_SOURCE_FROM_CTX/ $APP_DEST/
 
 # Clean up
 RUN rm pyproject.toml poetry.lock
