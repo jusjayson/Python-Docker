@@ -1,6 +1,13 @@
+# NOTE: This specified docker environmental variables are not exhaustive,
+# and are restricted to those base variables intended for use in every project.
 
-include $(DOCKER_COMMON_ENV_FILE)
-include $(DOCKER_SPECIFIC_ENV_FILE)
+ifdef DOCKER_COMMON_ENV_PATH
+include $(DOCKER_COMMON_ENV_PATH)
+endif
+
+ifdef DOCKER_SPECIFIC_ENV_PATH
+include $(DOCKER_SPECIFIC_ENV_PATH)
+endif
 export
 
 DOCKER_APP_DEST ?= /app
