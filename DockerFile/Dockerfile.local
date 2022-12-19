@@ -11,13 +11,13 @@ RUN chmod +x $ENTRYPOINT_DEST
 
 # Install dependencies using poetry
 ARG APP_DEST=/app
-ARG APP_SOURCE
-COPY ${APP_SOURCE}/pyproject.toml $APP_DEST
-COPY ${APP_SOURCE}/poetry.lock $APP_DEST
+ARG APP_SOURCE_FROM_CTX
+COPY ${APP_SOURCE_FROM_CTX}/pyproject.toml $APP_DEST/
+COPY ${APP_SOURCE_FROM_CTX}/poetry.lock $APP_DEST/
 WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --no-interaction --no-ansi --no-root -v
-COPY $APP_SOURCE $APP_DEST
+COPY $APP_SOURCE_FROM_CTX $APP_DEST
 
 # Clean up
 RUN rm pyproject.toml poetry.lock
