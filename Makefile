@@ -55,4 +55,4 @@ deploy-project:
 
 		
 teardown-project:
-	docker compose -f $(DOCKER_COMPOSE_FILE) down
+	docker compose -f $(DOCKER_COMPOSE_FILE) down --remove-orphans
