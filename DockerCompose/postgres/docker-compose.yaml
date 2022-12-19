@@ -6,7 +6,7 @@ postgres:
       - POSTGRES_USER=${PG_USER}
     volumes:
       - ${PROJECT_NAME}-${NAMESPACE}-postgres-data:/var/lib/postgresql/data
-      - ./scripts/postgres:/docker-entrypoint-initdb.d
+      - ./scripts/postgres/${NAMESPACE}:/docker-entrypoint-initdb.d
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_NAME}"]
