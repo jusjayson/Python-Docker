@@ -1,0 +1,23 @@
+  myproject:
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  rabbitmq:
+    image: rabbitmq:3.11
+    hostname: ${PROJECT_NAME}-rabbitmq-${NAMESPACE}
+    container_name: ${PROJECT_NAME}-rabbitmq-${NAMESPACE}
+    command: rabbitmq-server
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+
+    ports:
+      - ${AMQP_PORT}:5672
+      - "${PROMETHEUS_PORT}:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
