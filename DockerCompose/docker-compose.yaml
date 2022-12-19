@@ -2,7 +2,7 @@ version: "3"
 services:
   ${PROJECT_NAME}:
     image: ${DOCKER_REGISTRY}/${PROJECT_NAME}/${NAMESPACE}:${DOCKER_TAG_VERSION}
-    container_name: "$PROJECT_NAME"
+    container_name: "${PROJECT_NAME}-${NAMESPACE}"
     environment:
     restart: unless-stopped
     depends_on:
