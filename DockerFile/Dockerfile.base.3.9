@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.9-slim
 ENV PYTHONUNBUFFERED=1 \
     PYTHONFAULTHANDER=1 \
     PATH="/root/.local/bin:$PATH"
@@ -8,7 +8,8 @@ RUN apt-get update \
     curl \
     gcc \
     git \
-    libpq-dev
+    libpq-dev \
+    make
 
 # add github and gitlab to known hosts in order to install dependencies via poetry
 RUN mkdir -p -m u=rw ~/.ssh \
