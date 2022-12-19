@@ -6,4 +6,3 @@ services:
     environment:
     restart: unless-stopped
     depends_on:
-    env_file: .env

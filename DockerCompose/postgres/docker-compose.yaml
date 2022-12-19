@@ -15,4 +15,3 @@ postgres:
       retries: 5
     ports:
       - ${PG_PORT}:5432
-    env_file: .env
