@@ -1,8 +1,5 @@
 version: "3"
 services:
-  ${PROJECT_NAME}:
-    env_file: .env
-
-volumes:
-  "${DOCKER_APP_SOURCE}:${DOCKER_APP_DEST}":
-    driver: local
+  my-project:
+    volumes:
+      - "${DOCKER_APP_SOURCE_FROM_COMPOSE}:${DOCKER_APP_DEST}"
