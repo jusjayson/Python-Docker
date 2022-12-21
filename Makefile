@@ -29,7 +29,7 @@ DOCKER_ENTRYPOINT_SOURCE ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_RO
 build-base-image:
 	DOCKER_BUILDKIT=1 PROJECT_NAME=python-docker docker build \
 		-t $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION) \
-		-f ./config/docker/Dockerfile.base.$(PYTHON_VERSION) .
+		-f ./config/docker/build/Dockerfile.base.$(PYTHON_VERSION) .
 
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
