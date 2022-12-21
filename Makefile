@@ -41,7 +41,7 @@ build-project:
 		--build-arg ENTRYPOINT_DEST=$(DOCKER_ENTRYPOINT_DEST) \
 		-t $(DOCKER_REGISTRY)/$(PROJECT_NAME)/$(NAMESPACE):$(DOCKER_TAG_VERSION) \
 		--ssh default=$(HOME)/.ssh/id_rsa \
-		-f ./DockerFile/Dockerfile.$(NAMESPACE) \
+		-f ./config/docker/build/Dockerfile.$(NAMESPACE) \
 		--progress=plain \
 	$(DOCKER_CTX_FROM_PYTHON_DOCKER)
 
