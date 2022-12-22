@@ -62,5 +62,5 @@ launch-local-project:
 	NAMESPACE=$(NAMESPACE) \
 	PROJECT_NAME=$(PROJECT_NAME) \
 	docker compose \
-		-f src/config/docker/compose/docker-compose.local.yaml \
+		-f config/docker/compose/docker-compose.local.yaml \
 		run -it ${PROJECT_NAME} $(DOCKER_LOCAL_CMD)
