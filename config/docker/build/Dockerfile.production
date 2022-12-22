@@ -25,6 +25,5 @@ RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
 # Clean up
 RUN rm pyproject.toml poetry.lock
 WORKDIR /
-RUN mkdir -p logs
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
