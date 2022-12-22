@@ -1,15 +1,6 @@
 # NOTE: This specified docker environmental variables are not exhaustive,
 # and are restricted to those base variables intended for use in every project.
 
-ifdef DOCKER_COMMON_ENV_PATH
-include $(DOCKER_COMMON_ENV_PATH)
-endif
-
-ifdef DOCKER_SPECIFIC_ENV_PATH
-include $(DOCKER_SPECIFIC_ENV_PATH)
-endif
-export
-
 DOCKER_APP_DEST ?= /app
 DOCKER_APP_SOURCE_FROM_CTX ?=
 DOCKER_CTX_FROM_PYTHON_DOCKER ?= ..
@@ -21,6 +12,15 @@ DOCKER_TAG_VERSION ?= latest
 NAMESPACE ?=
 PROJECT_NAME ?=
 PYTHON_VERSION ?= 3.10
+
+ifdef DOCKER_COMMON_ENV_PATH_FROM_PYTHON_DOCKER
+include $(DOCKER_COMMON_ENV_PATH_FROM_PYTHON_DOCKER)
+endif
+
+ifdef DOCKER_SPECIFIC_ENV_PATH_FROM_PYTHON_DOCKER
+include $(DOCKER_SPECIFIC_ENV_PATH_FROM_PYTHON_DOCKER)
+endif
+export
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:latest
 DOCKER_COMPOSE_FILE ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_ROOT_FROM_CTX)/config/docker/compose/docker-compose.$(NAMESPACE).yaml
