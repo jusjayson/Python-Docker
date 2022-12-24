@@ -5,10 +5,6 @@ ENV NAMESPACE=production
 ARG ENTRYPOINT_SOURCE
 ENV ENTRYPOINT_DEST="/entrypoint.sh"
 
-# Setup run script
-COPY $ENTRYPOINT_SOURCE $ENTRYPOINT_DEST
-RUN chmod +x $ENTRYPOINT_DEST
-
 # Install dependencies using poetry
 ARG APP_DEST=/app
 ARG APP_SOURCE_FROM_CTX
@@ -21,6 +17,10 @@ COPY $APP_SOURCE_FROM_CTX/ $APP_DEST/
 RUN mv $APP_DEST/src/* $APP_DEST/
 RUN rm -R $APP_DEST/src
 RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
+
+# Setup run script
+COPY $ENTRYPOINT_SOURCE $ENTRYPOINT_DEST
+RUN chmod +x $ENTRYPOINT_DEST
 
 # Clean up
 RUN rm pyproject.toml poetry.lock
