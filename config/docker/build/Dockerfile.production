@@ -13,9 +13,8 @@ COPY ${APP_SOURCE_FROM_CTX}/poetry.lock $APP_DEST/
 WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --without dev --no-interaction --no-ansi --no-root -v
-COPY $APP_SOURCE_FROM_CTX/ $APP_DEST/
-RUN mv $APP_DEST/src/* $APP_DEST/
-RUN rm -R $APP_DEST/src
+COPY $APP_SOURCE_FROM_CTX/src $APP_DEST/src
+COPY $APP_SOURCE_FROM_CTX/README.md $APP_DEST/
 RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
 
 # Setup run script
