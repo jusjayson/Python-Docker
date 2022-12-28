@@ -2,7 +2,7 @@
 # and are restricted to those base variables intended for use in every project.
 
 DOCKER_APP_DEST ?= /app
-DOCKER_APP_SOURCE_FROM_CTX ?=
++DOCKER_PROJECT_ROOT_FROM_CTX ?=
 DOCKER_CTX_FROM_PYTHON_DOCKER ?= ..
 DOCKER_NO_WATCH ?=
 DOCKER_PROJECT_ROOT_FROM_CTX ?=
@@ -34,7 +34,7 @@ build-base-image:
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
 		--build-arg APP_DEST=$(DOCKER_APP_DEST) \
-		--build-arg APP_SOURCE_FROM_CTX=$(DOCKER_APP_SOURCE_FROM_CTX) \
+		--build-arg APP_SOURCE_FROM_CTX=$(DOCKER_PROJECT_ROOT_FROM_CTX) \
 		--build-arg BASE_IMG=$(DOCKER_BASE_IMG) \
 		--build-arg NAMESPACE=$(NAMESPACE) \
 		--build-arg ENTRYPOINT_SOURCE=$(DOCKER_ENTRYPOINT_SOURCE_FROM_CTX) \
