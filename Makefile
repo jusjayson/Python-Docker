@@ -2,7 +2,6 @@
 # and are restricted to those base variables intended for use in every project.
 
 DOCKER_APP_DEST ?= /app
-+DOCKER_PROJECT_ROOT_FROM_CTX ?=
 DOCKER_CTX_FROM_PYTHON_DOCKER ?= ..
 DOCKER_NO_WATCH ?=
 DOCKER_PROJECT_ROOT_FROM_CTX ?=
@@ -22,7 +21,11 @@ include $(DOCKER_SPECIFIC_ENV_PATH_FROM_PYTHON_DOCKER)
 endif
 export
 
-DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:latest
+ifdef DOCKER_NO_CACHE
+	DOCKER_USE_CACHE = --no-cache
+endif
+
+DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION)
 DOCKER_COMPOSE_FILE ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_ROOT_FROM_CTX)/config/docker/compose/docker-compose.$(NAMESPACE).yaml
 DOCKER_ENTRYPOINT_SOURCE_FROM_CTX ?= $(DOCKER_CTX_FROM_PYTHON_DOCKER)/$(DOCKER_PROJECT_ROOT_FROM_CTX)/config/docker/scripts/$(NAMESPACE)-entrypoint.sh
 
@@ -43,6 +46,7 @@ build-project:
 		--ssh default=$(HOME)/.ssh/id_rsa \
 		-f ./config/docker/build/Dockerfile.$(NAMESPACE) \
 		--progress=plain \
+		$(DOCKER_USE_CACHE) \
 	$(DOCKER_CTX_FROM_PYTHON_DOCKER)
 
 deploy-project:
