@@ -22,7 +22,9 @@ endif
 export
 
 ifdef DOCKER_NO_CACHE
-	DOCKER_USE_CACHE = --no-cache
+	DOCKER_CACHE_OPTION = --no-cache
+endif
+
 endif
 
 DOCKER_BASE_IMG ?= $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION)
@@ -46,7 +48,7 @@ build-project:
 		--ssh default=$(HOME)/.ssh/id_rsa \
 		-f ./config/docker/build/Dockerfile.$(NAMESPACE) \
 		--progress=plain \
-		$(DOCKER_USE_CACHE) \
+		$(DOCKER_CACHE_OPTION) \
 	$(DOCKER_CTX_FROM_PYTHON_DOCKER)
 
 deploy-project:
