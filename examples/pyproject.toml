@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "my_project"
+version = "0.1.0"
+description = "Do things that make life easier for"
+authors = ["Ms Mrs <msmrs@awesome.me>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "my_project", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
