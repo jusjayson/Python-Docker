@@ -4,5 +4,8 @@ services:
     image: ${DOCKER_REGISTRY}/${PROJECT_NAME}/${NAMESPACE}:${DOCKER_TAG_VERSION}
     container_name: "${PROJECT_NAME}-${NAMESPACE}"
     environment:
+      CONFIG_FOLDER_PATH: ${DOCKER_CONFIG_FOLDER_PATH}
+      LOG_FOLDER_PATH: ${DOCKER_LOG_FOLDER_PATH}
+      PROJECT_NAME: ${PROJECT_NAME}
     restart: unless-stopped
     depends_on:
