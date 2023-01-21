@@ -10,6 +10,7 @@ ARG APP_DEST=/app
 ARG APP_SOURCE_FROM_CTX
 ARG CONFIG_FOLDER_PATH
 ARG CTX_FROM_COMPOSE
+ARG LOG_FOLDER_PATH
 ARG USER_CONFIG_PATH_FROM_CTX
 COPY ${APP_SOURCE_FROM_CTX}/pyproject.toml $APP_DEST/
 COPY ${APP_SOURCE_FROM_CTX}/poetry.lock $APP_DEST/
@@ -19,6 +20,7 @@ RUN --mount=type=ssh poetry install --without dev --no-interaction --no-ansi --n
 COPY $APP_SOURCE_FROM_CTX/src $APP_DEST/src
 COPY ${DOCKER_CTX_FROM_COMPOSE}/${DOCKER_USER_CONFIG_PATH_FROM_CTX} $DOCKER_CONFIG_FOLDER_PATH/
 COPY $APP_SOURCE_FROM_CTX/README.md $APP_DEST/
+RUN mkdir -p ${LOG_FOLDER_PATH}
 RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
 
 # Setup run script
