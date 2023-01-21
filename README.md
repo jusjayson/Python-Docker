@@ -107,7 +107,8 @@ The following path file variables (used to override default variables and provid
 - ``DOCKER_LOCAL_COMMAND``: Command run on start of docker container when running ``make launch-local-project``
 - ``DOCKER_NO_CACHE`` (relevant for building projects): If defined, docker will not use its pre-existing cache (if any) while building the intended project
 - ``DOCKER_TAG_VERSION`` (defaults to latest): Which version of the relevant image to pull (i.e., Python base image or project). In the case of the former, this variable should be passed as an environmental variable, i.e.: ``DOCKER_TAG_VERSION=1.2 make build-base-image``
-- ``DOCKER_USER_CONFIG_PATH_FROM_CTX``: Path to config folder to be passed into project's docker container (conventionally pathed at {PROJECT_ROOT}/{config})
+- ``DOCKER_USER_CONFIG_PATH_FROM_CTX``: Path to config folder to be passed into project's docker container (conventionally pathed at {PROJECT_ROOT}/config)
+- ``DOCKER_USER_LOCAL_LOG_PATH_FROM_CTX`` (relevant only for local namespace, see ``examples/docker/compose/docker-compose.local.yaml): Path to log folder to be passed into project's docker container (conventionally pathed at {PROJECT_ROOT}/logs)
 - ``DOCKER_WATCH`` (relevant to deploy-project):  If defined (by default, it isn't), the container will be deployed without ``-d`` option (such that the container does not run in the background)
 
 <br/>
