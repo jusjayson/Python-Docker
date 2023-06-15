@@ -43,6 +43,27 @@ build-base-image:
 		-t $(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION) \
 		-f ./config/docker/build/Dockerfile.base.$(PYTHON_VERSION) .
 
+init-project:
+	docker run \
+		-v $(DOCKER_ABSOLUTE_APP_SOURCE):/app \
+		--name init-project \
+		-it \
+		$(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION) \
+		bash -c "cd /app && poetry init && poetry install --no-root" && \
+	docker rm init-project && \
+	sudo chown -R $(USER) $(DOCKER_ABSOLUTE_APP_SOURCE)/pyproject.toml && \
+	sudo chown -R $(USER) $(DOCKER_ABSOLUTE_APP_SOURCE)/poetry.lock
+
+update-project:
+	docker run \
+		-v $(DOCKER_ABSOLUTE_APP_SOURCE):/app \
+		--name update-project \
+		-it \
+		$(DOCKER_REGISTRY)/python-docker/$(PYTHON_VERSION)/base:$(DOCKER_TAG_VERSION) \
+		bash -c "cd /app && poetry update" && \
+	docker rm update-project
+	
+
 build-project:
 	DOCKER_BUILDKIT=1 docker build \
 		--build-arg APP_DEST=$(DOCKER_APP_DEST) \
