@@ -2,6 +2,7 @@
 # and are restricted to those base variables intended for use in every project.
 
 DOCKER_APP_DEST ?= /app
+DOCKER_ABSOLUTE_APP_SOURCE ?=  # generated via project makefile
 DOCKER_CONFIG_FOLDER_PATH ?= /root/.$(PROJECT_NAME)/config
 DOCKER_CTX_FROM_COMPOSE ?= ../../../..
 DOCKER_CTX_FROM_PYTHON_DOCKER ?= ..
