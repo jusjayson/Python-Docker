@@ -18,7 +18,7 @@ WORKDIR $APP_DEST
 # Separate dependencies from root for caching
 RUN --mount=type=ssh poetry install --without dev --no-interaction --no-ansi --no-root -v
 COPY $APP_SOURCE_FROM_CTX/src $APP_DEST/src
-COPY ${DOCKER_CTX_FROM_COMPOSE}/${DOCKER_USER_CONFIG_PATH_FROM_CTX} $DOCKER_CONFIG_FOLDER_PATH/
+COPY ${CTX_FROM_COMPOSE}/${USER_CONFIG_PATH_FROM_CTX} $CONFIG_FOLDER_PATH/
 COPY $APP_SOURCE_FROM_CTX/README.md $APP_DEST/
 RUN mkdir -p ${LOG_FOLDER_PATH}
 RUN --mount=type=ssh poetry install --only-root --no-interaction --no-ansi -v
